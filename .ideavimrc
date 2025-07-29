@@ -3,11 +3,18 @@
 " You can find a list of commands here: https://jb.gg/h38q75
 " Find more examples here: https://jb.gg/share-ideavimrc
 
-"Use line cursor in all modes
-let mapleader = ","
-"Use system clipboard
-set clipboard=unnamed
-"ship movement keys by one to the right
+
+"----------general Settings--------------
+set scrolloff=10
+set linenumber
+set showmode
+set showcmd
+set visualbell
+set clipboard+=unnamed
+set relativenumber
+set scrolloff=10
+
+"-----------Navigation Keys--------------
 "left
 noremap j h
 "up
@@ -18,21 +25,7 @@ noremap l k
 noremap ; l
 "remap move to end of word
 noremap ' ;
-
-sethandler <C-S-O>  a:ide
-
-set timeoutlen=500
-
-" --- THE MAPPING ---
-" Map 'j' in INSERT MODE to run our new, reliable function
-inoremap jj <ESC>
-" --- MAPPINGS FOR OTHER MODES ---
-" These are still needed and will use the global 'timeoutlen'
-vnoremap jk <Esc>
-cnoremap jj <C-c>
-noremap Y y$
-" In insert or command mode, move normally by using Ctrl
-
+"for insert mode and 
 inoremap <C-j> <Left>
 inoremap <C-k> <Down>
 inoremap <C-l> <Up>
@@ -41,72 +34,77 @@ cnoremap <C-j> <Left>
 cnoremap <C-k> <Down>
 cnoremap <C-l> <Up>
 cnoremap <C-;> <Right>
-
 "pane navigation
 nnoremap <A-j> <C-w>h
 nnoremap <A-k> <C-w>j
 nnoremap <A-l> <C-w>k
 nnoremap <A-;> <C-w>l
-"move between methods
 
+"moving between methods
 map [[ <Action>(MethodUp)
 map ]] <Action>(MethodDown)
 
+
+"set Leader to ,
+let mapleader = ","
+"Allow ide have reload file: 
+sethandler <C-S-O>  a:ide
+"shorten timoutlen
+set timeoutlen=500
+
+"-----------switching modes--------------
+set timeoutlen=500
+vnoremap jk <Esc>
+cnoremap jj <C-c>
+
+"---------------miscellaneous-----------------
+"indent numbers
 vmap < <gv
 vmap > >gv
 
+"go to usages and declarations
 nmap <leader>b <Action>(GotoDeclaration)
+
+"optimize imports
 nmap <leader>o <Action>(OptimizeImports)
 
-"Select next Occurrence multiple cursors
-sethandler <A-j> a:ide
 
+"Handoff to ide in insert mode
 sethandler <C-j> n-v-x:ide i:vim
 sethandler <C-k> n-v-x:ide i:vim
 sethandler <C-l> n-v-x:ide i:vim
 sethandler <C-;> n-v-x:ide i:vim
 
-
-" --- Step 1: Prevent Ctrl+E and Ctrl+Y from inserting characters in Insert mode ---
-" And ensure they always pass to the IDE for their IntelliJ actions.
+"" And ensure they always pass to the IDE for their IntelliJ actions.
 sethandler <C-e> n-v-x:ide
 sethandler <C-y> n-v-x:ide
-
-set relativenumber
-"Ide action set to vim
-
-map <leader>n <Action>(GotoFile)
-vmap <leader>j <Action>(SurroundWithLiveTemplate)
-
-
-"Search improvements
-set ignorecase
-set smartcase
-set incsearch
-set hlsearch
-
-" show a few lines of context around the cursor. note that this makes the
-" text scroll if you mouse-click near the start or end of the window.
-set scrolloff=10
-
-" do incremental searching.
-set NERDTree
-"set sneak
-
-set which-key
-set showcmd
-set surround
 
 " don't use ex mode, use q for formatting.
 map q gg
 
-" --- enable ideavim plugins https://jb.gg/ideavim-plugins
+sethandler <C-u> v-x-i:vim n-c:ide
 
+noremap Y y$
+"-----------------Search Improvements----------------------- 
+set ignorecase
+set smartcase
+set incsearch
+set hlsearch
+nnoremap <leader>n :set hlsearch!<CR>
+
+
+"-----------------------Plugins-----------------------------
 " highlight copied text
 plug 'machakann/vim-highlightedyank'
-" commentary plugin
+"commentary plugin
 "plug 'tpope/vim-commentary'
+set which-key
+set showcmd
+set surround
+set NERDTree
 
+
+"-------------------Misc Leader's Remaps--------------------
 
 "" -- map ide actions to ideavim -- https://jb.gg/abva4t
 "map \r to the reformat code action
@@ -117,3 +115,5 @@ map <leader>d <action>(debug)
 
 "" map \b to toggle the breakpoint on the current line
 map \b <Action>(ToggleLineBreakpoint)
+
+

@@ -1,5 +1,5 @@
 " .ideavimrc is a configuration file for IdeaVim plugin. It uses
-"   the same commands as the original .vimrc configuration.
+" the same commands as the original .vimrc configuration.
 " You can find a list of commands here: https://jb.gg/h38q75
 " Find more examples here: https://jb.gg/share-ideavimrc
 
@@ -15,9 +15,7 @@ set relativenumber
 set scrolloff=10
 
 "------------------------------ Navigation Keys -------------------------------
-"left
-"for insert mode and 
-"for insert mode and 
+"for insert mode and
 cnoremap <C-h> <Left>
 cnoremap <C-j> <Down>
 cnoremap <C-k> <Up>
@@ -28,12 +26,10 @@ nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
 
-
 inoremap <C-k> <Up>
 inoremap <C-j> <Down>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
-
 
 "set Leader to ,
 let mapleader = " "
@@ -56,8 +52,6 @@ set surround
 set NERDTree
 
 "---------------------------- NERDTree Mappings -------------------------------
-"------------------------------ Sneak Remaps ----------------------------------
-"--------------------------- ReplaceWithRegister ------------------------------
 "---------------------------- switching modes ---------------------------------
 set timeoutlen=500
 vnoremap jk <Esc>
